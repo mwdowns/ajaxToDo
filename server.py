@@ -15,10 +15,27 @@ def list_tasks():
 
 @app.route('/add_task', methods=['POST'])
 def add_task():
-    print request.form
     description = request.form.get('task')
     result = db.insert('task', description=description)
     return jsonify(result)
+
+@app.route('/mark_task', methods=['POST'])
+def done_task():
+    id = int(request.form.get('id'))
+    done = request.form.get('done')
+    result = db.update('task',
+        {'id': id,
+        'done': done
+    })
+    return jsonify(result)
+
+@app.route('/remove_task', methods=['POST'])
+def remove_task():
+    id = int(request.form.get('id'))
+    result = db.delete('task', {'id': id})
+    return jsonify(result)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

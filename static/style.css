@@ -23,3 +23,7 @@ ul#task-list li {
 .button-bar {
   border-top: 1px solid gray;
 }
+
+.done {
+  text-decoration: line-through;
+}
